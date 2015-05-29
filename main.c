@@ -22,19 +22,18 @@ struct Point2D* parray[MAX_SIZE];
 struct Rect* rarray[MAX_SIZE];
 
 bool deserialization(char* path){
-	FILE *fp;
+	FILE* fp;
 	char line[100];
 	size_t len = 0;
 	int read;
-	fp = fopen("input", "r");
+	fp = fopen(path, "r");
 	if (fp == NULL) {
 		fprintf(stderr, "Can't open input file!\n");
 		exit(1);
 	}
-	char *delim = " ";
-	char * pch, *tline, *end_found;
+	char* delim = " ";
+	char *pch, *tline, *end_found;
 	while (fgets(line, sizeof(line), fp)) {
-		printf("line: %s", line);
 		tline = (char*)calloc(strlen(line) + 1, sizeof(char));
 		strcpy(tline, line);
 		pch = strtok(tline, delim);
@@ -68,7 +67,6 @@ bool deserialization(char* path){
 			end_found = strstr(tline, "9999.9");
 			if (end_found != NULL){
 				fclose(fp);
-				printf("finish!");
 				return true;
 			}
 			// read point data
